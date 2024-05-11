@@ -4,6 +4,7 @@ import {Frequency, useFrequency} from "react-frequency";
 import {useEffect, useState} from "react";
 import {tone} from "../../dtmf";
 import * as timers from "timers";
+import DialButtonTriple from "../dial-button/DialButtonTriple";
 
 function DialPad() {
     const [freqA, setFreqA] = useState(100);
@@ -24,7 +25,9 @@ function DialPad() {
             oscA.start();
             oscB.start();
 
-            setTimeout(()=>{setAllowStop(true)},250);
+            setTimeout(() => {
+                setAllowStop(true)
+            }, 250);
             if (!isPressed && allowStop)
                 setIsPlaying(false);
         } else {
@@ -41,15 +44,28 @@ function DialPad() {
     }, [allowStop, currButton, isPlaying, isPressed, oscA, oscB]);
 
     return <div id={"dial-pad"}>
-        {"123456789".split('').map((i) =>
+        {"123A456B789C*0#D".split('').map((i) =>
             <DialButtonSingle key={i} value={i}
                               onPress={() => {
                                   setCurrButton(i);
                                   setIsPressed(true);
                               }}
-                              onRelease={()=>setIsPressed(false)}
+                              onRelease={() => setIsPressed(false)}
             />)}
-
+        <DialButtonTriple key={'busy'} value={'busy'}
+                          onPress={() => {
+                              setCurrButton('busy');
+                              setIsPressed(true);
+                          }}
+                          onRelease={() => setIsPressed(false)}
+        />
+        <DialButtonSingle key={"idle"} value={"idle"}
+                          onPress={() => {
+                              setCurrButton("idle");
+                              setIsPressed(true);
+                          }}
+                          onRelease={()=>setIsPressed(false)}
+        />
     </div>
 }
 

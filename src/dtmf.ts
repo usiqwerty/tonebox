@@ -7,11 +7,19 @@ const pad = [
     ['*', '0', '#', 'D']];
 
 export function tone(value: string) {
-    for (let row=0;row<4; row++){
-        for(let col=0; col<4; col++){
-            if( pad[row][col] === value)
-                return [horisontal[col], vertical[row]];
-        }
+
+    switch (value){
+        case "busy":
+            return [480, 620];
+        case "idle":
+            return [350, 440];
+        default:
+            for (let row=0;row<4; row++){
+                for(let col=0; col<4; col++){
+                    if( pad[row][col] === value)
+                        return [horisontal[col], vertical[row]];
+                }
+            }
+            return [100, 100];
     }
-    return [100, 100];
 }
