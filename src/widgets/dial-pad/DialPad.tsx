@@ -2,11 +2,17 @@ import "./DialPad.css";
 import DialButtonSingle from "../dial-button/DialButtonSingle";
 import {Frequency, useFrequency} from "react-frequency";
 import {useEffect, useState} from "react";
-import {tone} from "../../dtmf";
+import {duration, tone} from "../../dtmf";
 import * as timers from "timers";
 import DialButtonTriple from "../dial-button/DialButtonTriple";
+import PageHeader from "../header/PageHeader";
+import {unmountComponentAtNode} from "react-dom";
 
-function DialPad() {
+function play_times(count: number, duration: number) {
+
+}
+
+function DialPad({pad_layout}: { pad_layout: string[][] }) {
     const [freqA, setFreqA] = useState(100);
     const [freqB, setFreqB] = useState(100);
     const [currButton, setCurrButton] = useState('');
@@ -25,11 +31,13 @@ function DialPad() {
             oscA.start();
             oscB.start();
 
-            setTimeout(() => {
-                setAllowStop(true)
-            }, 250);
             if (!isPressed && allowStop)
                 setIsPlaying(false);
+
+            const [dur, count] = duration(currButton);
+            setTimeout(() => setAllowStop(true), dur);
+
+
         } else {
             if (isPressed) {
                 setAllowStop(false);
@@ -44,28 +52,30 @@ function DialPad() {
     }, [allowStop, currButton, isPlaying, isPressed, oscA, oscB]);
 
     return <div id={"dial-pad"}>
-        {"123A456B789C*0#D".split('').map((i) =>
+        {pad_layout.map(row => row.map((i) =>
             <DialButtonSingle key={i} value={i}
                               onPress={() => {
                                   setCurrButton(i);
                                   setIsPressed(true);
+
+                                  const [dur, count] = duration(currButton);
+
+
+                                  for (let i = 1; i < count; i++) {
+                                      console.log('start');
+                                      setTimeout(() => {
+                                          setIsPressed(true);
+
+                                          setTimeout(() => {
+                                              setIsPressed(false);
+                                          }, 15);
+                                      }, dur * 2 * i);
+
+                                  }
+
                               }}
                               onRelease={() => setIsPressed(false)}
-            />)}
-        <DialButtonTriple key={'busy'} value={'busy'}
-                          onPress={() => {
-                              setCurrButton('busy');
-                              setIsPressed(true);
-                          }}
-                          onRelease={() => setIsPressed(false)}
-        />
-        <DialButtonSingle key={"idle"} value={"idle"}
-                          onPress={() => {
-                              setCurrButton("idle");
-                              setIsPressed(true);
-                          }}
-                          onRelease={()=>setIsPressed(false)}
-        />
+            />))}
     </div>
 }
 
