@@ -22,7 +22,7 @@ export const redboxPad = [
     ['red-1.00']
 ];
 
-export function tone(value: string) {
+export function tone(value: string): [number, number] {
 
     switch (value) {
         case "busy":
@@ -61,7 +61,7 @@ export function tone(value: string) {
     }
 }
 
-export function duration(value: string) {
+export function duration(value: string): [number, number] {
     switch (value) {
         case 'red-0.05':
             return [66, 1];
