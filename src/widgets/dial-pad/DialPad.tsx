@@ -6,6 +6,12 @@ import {duration, tone} from "../../dtmf";
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 
+
+// @ts-ignore
+let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+
+
 function DialPad({pad_layout}: { pad_layout: string[][] }) {
     const [freqA, setFreqA] = useState(100);
     const [freqB, setFreqB] = useState(100);
@@ -16,30 +22,24 @@ function DialPad({pad_layout}: { pad_layout: string[][] }) {
     const oscA = useFrequency({hz: freqA, oscillator: "sine"});
     const oscB = useFrequency({hz: freqB, oscillator: "sine"});
 
-    function play_single(key: string, dur: number) {
-        setCurrButton(key);
-        setIsPressed(true);
-        setAllowStop(false);
+    function play_tone(freq: number, dur: number) {
+        const oscillator = audioCtx.createOscillator();
 
-        console.log("start");
+        oscillator.type = 'sine';
+        oscillator.frequency.value = freq;
+        oscillator.connect(audioCtx.destination);
+        oscillator.start();
 
-        setTimeout(() => {
-            console.log("stop");
-            setAllowStop(true);
-        }, dur);
-
+        setTimeout(
+            function () {
+                oscillator.stop();
+            }, dur);
     }
 
-    function play_sound(key: string) {
-        const [dur, count] = duration(currButton);
-
-        for (let i = 0; i < count; i += 2) {
-            console.log("Playing sound", dur, "ms");
-            play_single(key, dur);
-        }
+    function playNote([a, b]: [number, number], duration: number) {
+        play_tone(a, duration);
+        play_tone(b, duration);
     }
-
-
     useEffect(() => {
         if (allowStop) {
             if (!isPressed) {
@@ -86,7 +86,15 @@ function DialPad({pad_layout}: { pad_layout: string[][] }) {
         {pad_layout.map(row => row.map((i) =>
             <DialButtonSingle key={i} value={i}
                               onPress={() => {
-                                  play_sound(i);
+                                  // play_sound(i);
+                                  const [a, b] = tone(i);
+                                  const [dur, count] = duration(i);
+                                  for (let i = 0; i < count; i++) {
+                                      setTimeout(() => {
+                                          playNote([a, b], dur);
+                                      }, dur * i * 2);
+
+                                  }
                               }}
                               onRelease={() => setIsPressed(false)}
             />))}
