@@ -1,13 +1,22 @@
+.dial-btn {
+    user-select: none;
+
+    border: 4px #c2c2c2 outset;
+}
+
+.dial-btn:active {
+    border: 4px #c2c2c2 inset;
+}
+
 .dial-btn-single {
     /*width: 100%;*/
     /*height: 100%;*/
-    user-select: none;
+
 }
 
 .dial-btn-triple {
-    user-select: none;
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 4;
     /*width: 100%;*/
     /*height: 100%;*/
 }

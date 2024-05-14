@@ -13,19 +13,19 @@ function App() {
             <Routes>
                 <Route path={"/"} element={<>
                     <PageHeader type={"tone"}/>
-                    <DialPad pad_layout={dtmfPad}/>
+                    <DialPad type={"tone"} pad_layout={dtmfPad}/>
                 </>}/>
                 <Route path={"/national"} element={<>
                     <PageHeader type={"tone"}/>
-                    <DialPad pad_layout={nationalPad}/>
+                    <DialPad type={"national"}  pad_layout={nationalPad}/>
                 </>}/>
                 <Route path={"/bluebox"} element={<>
                     <PageHeader type={"blue"}/>
-                    <DialPad pad_layout={blueboxPad}/>
+                    <DialPad type={'bluebox'} pad_layout={blueboxPad}/>
                 </>}/>
                 <Route path={"/redbox"} element={<>
                     <PageHeader type={"red"}/>
-                    <DialPad pad_layout={redboxPad}/>
+                    <DialPad type={'redbox'} pad_layout={redboxPad}/>
                 </>}/>
             </Routes>
 </div>

@@ -11,7 +11,7 @@ export const nationalPad = [
     ['fr-dial', 'jp-dial']
 ];
 export const blueboxPad = [
-    ["blue-2600", '', '', ''],
+    ["tblue-2600", ''],
     ['1', '2', '3', ''],
     ['4', '5', '6', ''],
     ['7', '8', '9', ''],

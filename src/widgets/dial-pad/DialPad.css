@@ -1,5 +1,4 @@
 #dial-pad{
-    background-color: lightgray;
     padding: 30px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -7,4 +6,21 @@
     grid-gap: 5px;
     width:300px;
     height: 400px;
+}
+
+.tone, .national{
+    background-color: lightgray;
+}
+.tone > .dial-btn{
+    background-color: beige;
+}
+.bluebox{
+    background-color: #2741bd;
+}
+.bluebox > .dial-btn {
+    background-color: #484848;
+    color: white;
+}
+.redbox {
+    background-color: #a42121;
 }
