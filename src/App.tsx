@@ -2,10 +2,13 @@ import React from 'react';
 
 import './App.css';
 import DialPad from "./widgets/dial-pad/DialPad";
-import {dtmfPad, nationalPad, blueboxPad, redboxPad} from "./dtmf";
+import {dtmfPad} from "./widgets/pads/dtmf";
 import {Outlet, Route, Routes} from "react-router";
 import PageHeader from "./widgets/header/PageHeader";
 import Navbar from "./widgets/header/Navbar";
+import {nationalPad} from "./widgets/pads/national";
+import {blueboxPad} from "./widgets/pads/blue";
+import {redboxPad} from "./widgets/pads/red";
 
 function App() {
     return (

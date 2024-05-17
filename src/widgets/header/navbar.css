@@ -17,6 +17,7 @@
 }
 
 a {
+    user-select: none;
     text-decoration-line: none;
     color: black;
 }

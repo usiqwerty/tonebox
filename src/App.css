@@ -5,4 +5,8 @@
 }
 html{
     background-color: #545454;
+    overflow: hidden;
+}
+h1, button{
+    user-select: none;
 }

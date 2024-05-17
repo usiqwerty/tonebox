@@ -1,8 +1,8 @@
 import "./DialPad.css";
 import DialButtonSingle from "../dial-button/DialButtonSingle";
 import {useEffect, useState} from "react";
-import {duration, tone} from "../../dtmf";
 import DialButtonTriple from "../dial-button/DialButtonTriple";
+import {duration, tone} from "../../sounds";
 
 
 // @ts-ignore

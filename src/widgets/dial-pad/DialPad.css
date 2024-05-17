@@ -1,10 +1,10 @@
-#dial-pad{
+#dial-pad {
     padding: 30px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
     grid-gap: 5px;
-    width:300px;
+    width: 300px;
     height: 400px;
 
     border-radius: 5px;
@@ -12,19 +12,23 @@
     border-style: groove;
 }
 
-.tone, .national{
+.tone, .national {
     background-color: lightgray;
 }
-.tone > .dial-btn{
+
+.tone > .dial-btn {
     background-color: beige;
 }
-.bluebox{
+
+.bluebox {
     background-color: #2741bd;
 }
+
 .bluebox > .dial-btn {
     background-color: #484848;
     color: white;
 }
+
 .redbox {
     background-color: #a42121;
 }

@@ -1,5 +1,5 @@
 import "./DialButton.css"
-
+import {label} from "../../strings";
 function DialButtonSingle({value, onPress, onRelease}: { value: string, onPress: any, onRelease: any }) {
 
     return <button className={"dial-btn dial-btn-single"}
@@ -9,7 +9,7 @@ function DialButtonSingle({value, onPress, onRelease}: { value: string, onPress:
 
                    onMouseDown={'ontouchend' in window? ()=>{} :onPress}
                    onMouseUp={'ontouchstart' in window?  ()=>{}: onRelease}
-        >{value}</button>
+        >{label(value)}</button>
 }
 
 export default DialButtonSingle;
