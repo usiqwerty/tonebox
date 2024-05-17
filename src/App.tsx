@@ -16,7 +16,7 @@ function App() {
                     <DialPad type={"tone"} pad_layout={dtmfPad}/>
                 </>}/>
                 <Route path={"/national"} element={<>
-                    <PageHeader type={"tone"}/>
+                    <PageHeader type={"national"}/>
                     <DialPad type={"national"}  pad_layout={nationalPad}/>
                 </>}/>
                 <Route path={"/bluebox"} element={<>
